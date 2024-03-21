@@ -1,10 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
+import {Route, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom'
+import Home from './components/Home/Home.jsx'
+import Login from './components/Login/Login.jsx'
+import Signup from './components/Signup/Signup.jsx'
+import { auth } from './firebase/firebase.js'
+import { onAuthStateChanged } from 'firebase/auth'
+
+
+
+
+const router=createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<App/>}>
+      <Route path='' element={<Home/>}/>
+      <Route path='login' element={<Login/>}/>
+      <Route path='signup' element={<Signup/>}/>
+    </Route>
+  )
+)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+<RouterProvider router={router}/>
   </React.StrictMode>,
 )
